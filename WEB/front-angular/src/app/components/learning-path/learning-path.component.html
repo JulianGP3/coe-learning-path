@@ -1,0 +1,21 @@
+<form (ngSubmit)="handleLocalSubmit()">
+    <div class="mb-2">
+        <label class="control-label">Title</label>
+        <input class="form-control" type="hidden" [value]="id" name="title" />
+        <input class="form-control" type="text" [(ngModel)]="learningPathData.title" name="title" [disabled]="isReadOnly" (ngModelChange)="handleInputChange()" />
+    </div>
+    <div class="mb-2">
+        <label class="control-label">Description</label>
+        <ckeditor [editor]="editor" [(ngModel)]="learningPathData.description" name="description" [disabled]="isReadOnly" (change)="handleDescriptionChange($event)"></ckeditor>
+    </div>
+    <div class="mb-2">
+        <label class="control-label">Acceptance Criteria</label>
+        <ckeditor [editor]="editor" [(ngModel)]="learningPathData.acceptanceCriteria" [disabled]="isReadOnly"  name="criteria" (change)="handleAcceptanceCriteriaChange($event)"></ckeditor>
+    </div>
+    <div *ngIf="isReadOnly; else createButton">
+        <p class="text-info">Please update the learning path from the website</p>
+    </div>
+    <ng-template #createButton>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </ng-template>
+</form>
